@@ -5,8 +5,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 
-import authRoutes from './routes/auth.routes.js';
-import taskRoutes from './routes/task.routes.js';
+import authRoutes from './auth.routes.js';
+import taskRoutes from './task.routes.js';
 
 
 const app = express();
