@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import taskRoutes from './routes/task.routes.js';
 import authRoutes from './routes/auth.routes.js';
-import {connectToDB} from './config/db.js';
+import {connectToDB} from '../src/db/connect.js';
 
 const app = exxpress();
 
