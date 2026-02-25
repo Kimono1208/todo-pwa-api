@@ -9,7 +9,7 @@ export async function connectToDB(){
     if(!cached.promise){
         const {MONGO_URI}= process.env;
         if(!MONGO_URI) throw new Error('Por Favor define la variable de entorno MONGO_URI');
-        cached.promise = mongoose.connect(ONGO_URI, {dbName:"Cluster0"})
+        cached.promise = mongoose.connect(MONGO_URI, {dbName:"Cluster0"})
         .then((m)=> m.connection);
 
     }
