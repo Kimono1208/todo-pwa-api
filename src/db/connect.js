@@ -1,5 +1,5 @@
 //src/db/conect.js
-import moongoose from "mongoose";
+import mongoose from "mongoose";
  
 let cached = global._mongooseConn;
 if (!cached)cached = global._mongooseConn = { conn: null, promise: null};
