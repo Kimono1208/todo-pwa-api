@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {auth} from "../middleware/auth.js"
-import {list, create,update,remove} from "../controller/task.controller.js"
+import {list, create,update,remove,bulksync} from "../controller/task.controller.js"
 
 const router = Router();
 router.use(auth) ;
