@@ -28,6 +28,6 @@ app.use(async (req, res, next) => {
 
 app.get('/', (_req, res) => 
     res.json({ ok: true, name: 'Welcome to the Todo API' }));
-    app.use('/api/tasks', taskRoutes);
-    app.use('/api/auth', authRoutes);
+    app.use('/tasks', taskRoutes);
+    app.use('/auth', authRoutes);
      export default app;
