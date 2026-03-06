@@ -7,12 +7,13 @@ const taskSchema = new mongoose.Schema(
         description:{type:String, trim: true, default:''},
         status:{
             type: String,
-            enum:['Pendiente',' En progreso', 'completada'],
+            enum:['Pendiente','En progreso','Completada'],
             default: 'Pendiente',
         },
-        clienteId:{trype: String},
+        clienteId:{type: String},
+        parentId: { type: String, default: null },
         deleted:{type:Boolean, default: false},
-    },
+    },{ timestamps: true }
 
 );
 

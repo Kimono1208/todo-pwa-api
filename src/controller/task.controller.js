@@ -9,7 +9,7 @@ export async function list(req, res) {
 }
 
 export async function create(req, res) {
-  const { title, description = "", status = "Pendiente", clienteId } = req.body;
+  const { title, description = "", status = "Pendiente", clienteId, parentId = null } = req.body;
   if (!title) return res.status(400).json({ message: "El título es requerido" });
 
   const task = await Task.create({
@@ -18,6 +18,7 @@ export async function create(req, res) {
     description,
     status: allowed.includes(status) ? status : "Pendiente", // <-- allowed
     clienteId,
+    parentId,
   });
   res.status(201).json({ task });
 }
@@ -46,7 +47,11 @@ export async function remove(req, res) {
     { new: true }
   );
   if (!task) return res.status(404).json({ message: "Tarea no encontrada" });
-  res.json({ ok: true });
+  await Task.updateMany(
+    { parentId: id, user: req.userId }, 
+    { deleted: true }
+  );
+  res.json({ ok: true, message: "Tarea y subtareas eliminadas" });
 }
 
 /** ENDPOINT PARA SINCRONIZACIÓN OFFLINE: crea/actualiza por clienteId y devuelve el mapeo */
@@ -69,10 +74,12 @@ export async function bulksync(req, res) {
           description: t.description ?? "",
           status: allowed.includes(t.status) ? t.status : "Pendiente",
           clienteId: t.clienteId,
+          parentId: t.parentId ?? null,
         });
       } else {
         doc.title = t.title ?? doc.title;
         doc.description = t.description ?? doc.description;
+        doc.parentId = t.parentId ?? doc.parentId;
         if (t.status && allowed.includes(t.status)) doc.status = t.status;
         await doc.save();
       }
