@@ -5,17 +5,17 @@ import taskRoutes from './routes/task.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import {connectToDB} from './db/connect.js';
 
-const app = exxpress();
+const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:5173',
+    origin: ['http://localhost:5173/',
     process.env.FRONT_ORIGIN ||""
     ].filter(Boolean),
     credentials: true
 })
 );
 app.use(morgan('dev'));
-app.use(exxpress.json());
+app.use(express.json());
 
 app.use(async (req, res, next) => {
     try{

@@ -16,8 +16,8 @@ app.use(morgan('dev'));
 
 
 app.get('/', (req, res) => res.json({ok: true, name: 'Kimberly Todo API'}));
-app.use('/api/auth', authRoutes);
-app.use('/api/tasks', taskRoutes);
+app.use('/auth', authRoutes);
+app.use('/tasks', taskRoutes);
 
 const {PORT = 4000, MONGO_URI} = process.env;
 mongoose.connect(process.env.MONGO_URI, {dbName: 'Cluster0'})
